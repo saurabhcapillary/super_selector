@@ -1,5 +1,7 @@
 package com.saurabh.superselectorbackend.service;
 
+import com.saurabh.superselectorbackend.models.ResponseEntity;
+import com.saurabh.superselectorbackend.models.Users;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -16,5 +18,9 @@ import org.springframework.stereotype.Service;
 @Service
 @Component
 public class UsersGroupFacade {
+
+    public ResponseEntity login(Users users) {
+        return null;
+    }
     
 }
