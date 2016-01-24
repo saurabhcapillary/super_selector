@@ -2,6 +2,7 @@ package com.saurabh.superselectorbackend.controller;
 
 import com.saurabh.superselectorbackend.models.ResponseEntity;
 import com.saurabh.superselectorbackend.models.Users;
+import com.saurabh.superselectorbackend.models.response.UsersResponse;
 import com.saurabh.superselectorbackend.service.UsersGroupFacade;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -32,6 +33,7 @@ public class UserResource {
     @Inject
     private UsersGroupFacade usersGroupFacade;
     
+    @Path("/login/")
     @POST
     @Consumes( { MediaType.APPLICATION_JSON })
     @Produces( { MediaType.APPLICATION_JSON })
@@ -41,5 +43,12 @@ public class UserResource {
         return Response.status(200).entity(response).build();
     }
     
-    
+    @POST
+    @Consumes( { MediaType.APPLICATION_JSON })
+    @Produces( { MediaType.APPLICATION_JSON })
+    public Response register(@RequestBody Users users){
+        UsersResponse response =
+                usersGroupFacade.register(users);
+        return Response.status(200).entity(response).build();
+    }
 }

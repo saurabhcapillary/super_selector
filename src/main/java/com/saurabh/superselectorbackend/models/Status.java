@@ -44,6 +44,20 @@ public class Status extends BaseEntity {
 
     public Status() {
     }
+    
+    public Status(boolean Success){
+        if(Success){
+        setCode(200);
+            setSuccess(true);
+            setMessage("Success");
+        }
+        else{
+            setCode(500);
+            setSuccess(false);
+            setMessage("Failure");
+        }
+        setMessage(message);
+    }
 
   
     @XmlElement(name = "code")

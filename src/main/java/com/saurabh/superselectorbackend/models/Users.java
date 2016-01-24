@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author saurabh
  */
 
-@XmlRootElement
+@XmlRootElement(name = "users")
 public class Users extends BaseEntity{
     
     private long id;

@@ -1,5 +1,14 @@
 package com.saurabh.superselectorbackend.service;
 
+import com.saurabh.superselectorbackend.dao.MatchesDao;
+import com.saurabh.superselectorbackend.models.Matches;
+import com.saurabh.superselectorbackend.models.Squads;
+import com.saurabh.superselectorbackend.models.Status;
+import com.saurabh.superselectorbackend.models.response.MatchesResponse;
+import java.util.List;
+import javax.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -17,4 +26,25 @@ import org.springframework.stereotype.Service;
 @Component
 public class MatchesFacade {
     
+    @Inject
+    private MatchesDao matchesDao;
+    
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    
+    public MatchesResponse getMatches(String seriesName) {
+       MatchesResponse response = new MatchesResponse();
+       Status status=null;
+        try {
+            List<Matches> matches =matchesDao.getMatches(seriesName);
+            if(matches!=null & matches.size()>0){
+                response.setMatches(matches);
+                status =new Status(true);
+            }
+        } catch (Exception ex) {
+            logger.info("Error while getting matches " + ex.getMessage());
+            status=new Status(false);    
+        }
+        response.setStatus(status);
+        return response;
+    }
 }
