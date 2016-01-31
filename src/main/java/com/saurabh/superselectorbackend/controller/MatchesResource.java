@@ -1,5 +1,12 @@
 package com.saurabh.superselectorbackend.controller;
-import javax.ws.rs.Path;
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import com.saurabh.superselectorbackend.models.response.MatchesResponse;
+import com.saurabh.superselectorbackend.service.MatchesFacade;
+import com.saurabh.superselectorbackend.service.PlayerFacade;
 import org.springframework.stereotype.Controller;
 
 /*
@@ -15,5 +22,14 @@ import org.springframework.stereotype.Controller;
 @Path("/matches/")
 @Controller
 public class MatchesResource {
-    
+
+    @Inject
+    private MatchesFacade matchesFacade;
+
+    @GET
+    @Produces( { MediaType.APPLICATION_JSON })
+    public Response getCountry(@PathParam("seriesName")  String seriesName){
+         MatchesResponse response=matchesFacade.getMatches(seriesName);
+        return Response.status(200).entity(response).build();
+    }
 }

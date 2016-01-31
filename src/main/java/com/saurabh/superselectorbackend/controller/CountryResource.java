@@ -1,6 +1,7 @@
 
 package com.saurabh.superselectorbackend.controller;
 
+import javax.inject.Inject;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,6 +11,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+
+import com.saurabh.superselectorbackend.models.ResponseEntity;
+import com.saurabh.superselectorbackend.models.response.CountryResponse;
+import com.saurabh.superselectorbackend.service.CountryFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -32,12 +37,17 @@ public class CountryResource {
      
     @Context
     private UriInfo context;
+
+    @Inject
+    private CountryFacade countryFacade;
     
     @GET
     @Produces( { MediaType.APPLICATION_JSON })
-    public Response getCountry(@PathParam("id") @DefaultValue("0") long id){
-        return Response.status(200).entity("hello").build();
+    public Response getCountry(@PathParam("seriesId") @DefaultValue("0") long seriesId){
+        CountryResponse response =
+                countryFacade.getCountries(seriesId);
+        return Response.status(200).entity(response).build();
+
     }
-    
      
 }
