@@ -15,7 +15,7 @@ public class Matches {
     
     private long id;
     private String name;
-    private String vanue;
+    private String venue;
     private Date date;
     private long countryId;
     private long seriesId;
@@ -36,12 +36,12 @@ public class Matches {
         this.name = name;
     }
 
-    public String getVanue() {
-        return vanue;
+    public String getVenue() {
+        return venue;
     }
 
-    public void setVanue(String vanue) {
-        this.vanue = vanue;
+    public void setVenue(String venue) {
+        this.venue = venue;
     }
 
     public Date getDate() {

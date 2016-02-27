@@ -5,6 +5,7 @@
  */
 package com.saurabh.superselectorbackend.dao;
 
+import com.saurabh.superselectorbackend.models.Country;
 import com.saurabh.superselectorbackend.models.Squads;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,14 +30,13 @@ public class SquadsDao {
     }
     
     public List<Squads> getSquads(long seriesId){
-        
+
            String sql = "SELECT * FROM  super_selector.squads "
-                   + " where series_id=:seriesId ";
+                   + " where series_id= "+seriesId;
         try{
             RowMapper<Squads> rowMapper = new SquadsRowMapper();
-             List<Squads> squads = (List<Squads>) jdbcTemplate.queryForObject(
-			sql, new Object[] { seriesId }, rowMapper);
-            return squads;
+            List<Squads> squadsList = jdbcTemplate.query(sql,rowMapper);
+            return squadsList;
         }
         catch(Exception ex){
             return null;
@@ -46,14 +46,14 @@ public class SquadsDao {
     
     public class SquadsRowMapper implements RowMapper
     {
-            public Squads mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    Squads squads = new Squads();
-                    squads.setId(rs.getInt("id"));
-                    squads.setName(rs.getString("name"));
-                    squads.setLogo(rs.getString("logo"));
-                    squads.setShortName(rs.getString("shortname"));
-                    squads.setSeriesId(rs.getInt("series_id"));
-                    return squads;
-            }
+        public Squads mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Squads squads = new Squads();
+                squads.setId(rs.getInt("id"));
+                squads.setName(rs.getString("name"));
+                squads.setLogo(rs.getString("logo"));
+                squads.setShortName(rs.getString("shortName"));
+                squads.setSeriesId(rs.getInt("series_id"));
+                return squads;
+        }
     }
 }

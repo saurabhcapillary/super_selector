@@ -37,9 +37,9 @@ public class UsersGroupFacade {
         try {
             Users dbUser =
                 usersDao.login(users.getEmail(),users.getMobile(),users.getPasswordHash());
-            if(users.getId()>0){
-            entity.setData(dbUser);
-            status =new Status(true);
+            status = new Status(true);
+            if(users.getId()>0) {
+                entity.setData(dbUser);
             }
             return entity;
         } catch (Exception ex) {
@@ -56,9 +56,9 @@ public class UsersGroupFacade {
         try {
             Users dbUser =
                 usersDao.register(users);
-            if(users.getId()>0){
-                response.setUsers(users);
-                status =new Status(true);
+            status =new Status(true);
+            if(dbUser.getId()>0){
+                response.setUsers(dbUser);
             }
         } catch (Exception ex) {
             logger.info("Error while register " + ex.getMessage());

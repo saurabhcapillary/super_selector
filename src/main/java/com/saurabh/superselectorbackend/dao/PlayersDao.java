@@ -12,11 +12,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author saurabh
  */
+@Repository
 public class PlayersDao {
      private final JdbcTemplate jdbcTemplate; 
     
@@ -28,11 +30,11 @@ public class PlayersDao {
     public List<Players> getPlayers(long squadId){
         
            String sql = "SELECT * FROM  super_selector.players "
-                   + " where squad_id=:squadId";
+                   + " where squad_id="+squadId;
         try{
             RowMapper<Players> rowMapper = new PlayersRowMapper();
-             List<Players> players = (List<Players>) jdbcTemplate.queryForObject(
-			sql, new Object[] { squadId }, rowMapper);
+             List<Players> players =  jdbcTemplate.query(
+			sql, rowMapper);
             return players;
         }
         catch(Exception ex){

@@ -28,7 +28,7 @@ public class MatchesResource {
 
     @GET
     @Produces( { MediaType.APPLICATION_JSON })
-    public Response getCountry(@PathParam("seriesName")  String seriesName){
+    public Response getCountry(@QueryParam("seriesName")  String seriesName){
          MatchesResponse response=matchesFacade.getMatches(seriesName);
         return Response.status(200).entity(response).build();
     }

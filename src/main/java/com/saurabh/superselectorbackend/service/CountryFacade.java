@@ -29,15 +29,13 @@ public class CountryFacade {
     
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
-    public CountryResponse getCountries(long seriesId) {
+    public CountryResponse getCountries() {
        CountryResponse response = new CountryResponse();
        Status status=null;
         try {
             List<Country> countries =countryDao.getCountry();
-            if(countries!=null & countries.size()>0){
-                response.setCountries(countries);
-                status =new Status(true);
-            }
+            status =new Status(true);
+            response.setCountries(countries);
         } catch (Exception ex) {
             logger.info("Error while getting countries " + ex.getMessage());
             status=new Status(false);    

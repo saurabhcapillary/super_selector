@@ -36,13 +36,12 @@ public class MatchesDao {
         
            String sql = "SELECT * FROM  super_selector.matches AS m LEFT JOIN "
                    + "super_selector.series as s on m.series_id=s.id WHERE"
-                   + " s.name=:seriesName";
+                   + " s.name='"+seriesName+"'";
         try{
             RowMapper<Matches> rowMapper = new MatchesRowMapper();
             Map<String, Object> valueMap = new HashMap<>();
             valueMap.put("name", seriesName);
-             List<Matches> matches = (List<Matches>) jdbcTemplate.queryForObject(
-			sql, new Object[] { seriesName }, rowMapper);
+             List<Matches> matches =jdbcTemplate.query(sql, rowMapper);
             return matches;
         }
         catch(Exception ex){
@@ -59,7 +58,7 @@ public class MatchesDao {
                     matches.setName(rs.getString("name"));
                     matches.setCountryId(rs.getInt("country_id"));
                     matches.setSeriesId(rs.getInt("series_id"));
-                    matches.setVanue(rs.getString("venue"));
+                    matches.setVenue(rs.getString("venue"));
                     return matches;
             }
     }

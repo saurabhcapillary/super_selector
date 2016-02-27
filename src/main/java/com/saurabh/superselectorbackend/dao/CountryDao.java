@@ -34,7 +34,7 @@ public class CountryDao {
            String sql = "SELECT * FROM  super_selector.country  ";
         try{
             RowMapper<Country> rowMapper = new CountryRowMapper();
-             List<Country> country = (List<Country>) jdbcTemplate.queryForObject(
+             List<Country> country = jdbcTemplate.query(
 			sql, new Object[] { }, rowMapper);
             return country;
         }

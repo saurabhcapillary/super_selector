@@ -37,10 +37,8 @@ public class SquadFacade {
        Status status=null;
         try {
             List<Squads> squads =squadsDao.getSquads(seriesId);
-            if(squads!=null & squads.size()>0){
-                response.setSquads(squads);
-                status =new Status(true);
-            }
+            response.setSquads(squads);
+            status =new Status(true);
         } catch (Exception ex) {
             logger.info("Error while getting squads " + ex.getMessage());
             status=new Status(false);    

@@ -9,6 +9,7 @@ import com.saurabh.superselectorbackend.models.Country;
 import com.saurabh.superselectorbackend.models.Status;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 /**
  *
@@ -32,7 +33,8 @@ public class CountryResponse {
         status = new Status();
     }
 
-    @XmlElement(name = "countries")
+    @XmlElementWrapper(name = "countries")
+    @XmlElement(name="country")
     public List<Country> getCountries() {
         return countries;
     }

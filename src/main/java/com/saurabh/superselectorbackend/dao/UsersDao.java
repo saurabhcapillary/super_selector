@@ -41,7 +41,7 @@ public class UsersDao {
         paramMap.put("email", users.getEmail());
         paramMap.put("city", users.getCity());
         paramMap.put("state", users.getState());
-        paramMap.put("passwordHash", users.getPasswordHash());
+        paramMap.put("password", users.getPasswordHash());
         paramMap.put("country_id", users.getCountryId());
         paramMap.put("name", users.getName());
         try{

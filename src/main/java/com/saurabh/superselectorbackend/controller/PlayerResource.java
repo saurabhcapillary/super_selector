@@ -28,9 +28,9 @@ public class PlayerResource {
 
     @GET
     @Produces( { MediaType.APPLICATION_JSON })
-    public Response getCountry(@PathParam("seriesId") @DefaultValue("0") long seriesId){
-       // PlayersResponse response=playerFacade.
-        return Response.status(200).entity(null).build();
+    public Response getCountry(@PathParam("squadId") @DefaultValue("0") long squadId){
+        PlayersResponse response=playerFacade.getPlayers(squadId);
+        return Response.status(200).entity(response).build();
 
     }
     

@@ -33,13 +33,11 @@ public class MatchesFacade {
     
     public MatchesResponse getMatches(String seriesName) {
        MatchesResponse response = new MatchesResponse();
-       Status status=null;
+       Status status;
         try {
             List<Matches> matches =matchesDao.getMatches(seriesName);
-            if(matches!=null & matches.size()>0){
-                response.setMatches(matches);
-                status =new Status(true);
-            }
+            response.setMatches(matches);
+            status =new Status(true);
         } catch (Exception ex) {
             logger.info("Error while getting matches " + ex.getMessage());
             status=new Status(false);    

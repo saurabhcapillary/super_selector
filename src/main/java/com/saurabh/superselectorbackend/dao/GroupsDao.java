@@ -12,11 +12,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author saurabh
  */
+@Repository
 public class GroupsDao {
      private final JdbcTemplate jdbcTemplate; 
     
@@ -31,7 +33,7 @@ public class GroupsDao {
                    + " where created_by=:created_by ";
         try{
             RowMapper<Groups> rowMapper = new GroupsRowMapper();
-             List<Groups> groups = (List<Groups>) jdbcTemplate.queryForObject(
+             List<Groups> groups = jdbcTemplate.query(
 			sql, new Object[] { created_by }, rowMapper);
             return groups;
         }

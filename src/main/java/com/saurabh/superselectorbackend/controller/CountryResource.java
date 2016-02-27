@@ -32,7 +32,8 @@ import org.springframework.stereotype.Controller;
 @Path("/country/")
 @Controller
 public class CountryResource {
-     private static final Logger logger =
+
+    private static final Logger logger =
         LoggerFactory.getLogger(CountryResource.class);
      
     @Context
@@ -43,9 +44,9 @@ public class CountryResource {
     
     @GET
     @Produces( { MediaType.APPLICATION_JSON })
-    public Response getCountry(@PathParam("seriesId") @DefaultValue("0") long seriesId){
+    public Response getCountry(){
         CountryResponse response =
-                countryFacade.getCountries(seriesId);
+                countryFacade.getCountries();
         return Response.status(200).entity(response).build();
 
     }
