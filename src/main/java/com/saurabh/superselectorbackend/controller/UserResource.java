@@ -38,7 +38,7 @@ public class UserResource {
     @Consumes( { MediaType.APPLICATION_JSON })
     @Produces( { MediaType.APPLICATION_JSON })
     public Response Login(@RequestBody Users users){
-        ResponseEntity response =
+        UsersResponse response =
                 usersGroupFacade.login(users);
         return Response.status(200).entity(response).build();
     }

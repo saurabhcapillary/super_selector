@@ -31,23 +31,22 @@ public class UsersGroupFacade {
     
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
-    public ResponseEntity login(Users users) {
-       ResponseEntity entity = new ResponseEntity();
-       Status status;
+    public UsersResponse login(Users users) {
+        UsersResponse usersResponse = new UsersResponse();
+        Status status;
         try {
-            Users dbUser =
-                usersDao.login(users.getEmail(),users.getMobile(),users.getPasswordHash());
+            List<Users> dbUser =
+                    usersDao.login(users.getEmail(), users.getMobile(), users.getPasswordHash());
             status = new Status(true);
-            if(users.getId()>0) {
-                entity.setData(dbUser);
+            if (dbUser.size() > 0) {
+                usersResponse.setUsers(dbUser.get(0));
             }
-            return entity;
         } catch (Exception ex) {
             logger.info("Error while login " + ex.getMessage());
-            status=new Status(false);    
+            status = new Status(false);
         }
-        entity.setStatus(status);
-        return entity;
+        usersResponse.setStatus(status);
+        return usersResponse;
     }
     
     public UsersResponse register(Users users) {
