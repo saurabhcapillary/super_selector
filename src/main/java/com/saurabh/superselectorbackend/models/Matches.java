@@ -5,6 +5,7 @@
  */
 package com.saurabh.superselectorbackend.models;
 
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
 
 /**
@@ -19,6 +20,10 @@ public class Matches {
     private Date date;
     private long countryId;
     private long seriesId;
+    private long squadId1;
+    private long squadId2;
+    private String homeTeam;
+    private String awayTeam;
 
     public long getId() {
         return id;
@@ -66,5 +71,39 @@ public class Matches {
 
     public void setSeriesId(long seriesId) {
         this.seriesId = seriesId;
+    }
+
+    @XmlTransient
+    public long getSquadId1() {
+        return squadId1;
+    }
+
+    public void setSquadId1(long squadId1) {
+        this.squadId1 = squadId1;
+    }
+
+    @XmlTransient
+    public long getSquadId2() {
+        return squadId2;
+    }
+
+    public void setSquadId2(long squadId2) {
+        this.squadId2 = squadId2;
+    }
+
+    public String getHomeTeam() {
+        return homeTeam;
+    }
+
+    public void setHomeTeam(String homeTeam) {
+        this.homeTeam = homeTeam;
+    }
+
+    public String getAwayTeam() {
+        return awayTeam;
+    }
+
+    public void setAwayTeam(String awayTeam) {
+        this.awayTeam = awayTeam;
     }
 }

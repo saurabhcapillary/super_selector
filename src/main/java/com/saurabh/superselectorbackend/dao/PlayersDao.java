@@ -29,7 +29,8 @@ public class PlayersDao {
     
     public List<Players> getPlayers(long squadId){
         
-           String sql = "SELECT * FROM  super_selector.players "
+           String sql = "SELECT p.id,p.name,p.squad_id,p.country_id,sq.name as sq_name,c.name as c_name FROM  super_selector.players as p LEFT JOIN super_selector.country as c " +
+                   "on p.country_id=c.id LEFT JOIN super_selector.squads as sq on p.squad_id=sq.id"
                    + " where squad_id="+squadId;
         try{
             RowMapper<Players> rowMapper = new PlayersRowMapper();
@@ -43,15 +44,16 @@ public class PlayersDao {
     }
     
     
-    public class PlayersRowMapper implements RowMapper
-    {
-            public Players mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    Players players = new Players();
-                    players.setId(rs.getInt("id"));
-                    players.setName(rs.getString("name"));
-                    players.setCountryId(rs.getInt("country_id"));
-                    players.setSquadId(rs.getInt("squad_id"));
-                    return players;
-            }
+    public class PlayersRowMapper implements RowMapper {
+        public Players mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Players players = new Players();
+            players.setId(rs.getInt("id"));
+            players.setName(rs.getString("name"));
+            players.setCountryId(rs.getInt("country_id"));
+            players.setSquadId(rs.getInt("squad_id"));
+            players.setCountryName(rs.getString("c_name"));
+            players.setSquadName(rs.getString("sq_name"));
+            return players;
+        }
     }
 }

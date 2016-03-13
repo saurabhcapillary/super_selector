@@ -5,6 +5,8 @@
  */
 package com.saurabh.superselectorbackend.models;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  *
  * @author saurabh
@@ -15,7 +17,10 @@ public class Players {
     private String name;
     private long squadId;
     private long countryId;
+    private String countryName;
+    private String squadName;
 
+    @XmlTransient
     public long getId() {
         return id;
     }
@@ -32,6 +37,7 @@ public class Players {
         this.name = name;
     }
 
+    @XmlTransient
     public long getSquadId() {
         return squadId;
     }
@@ -40,6 +46,7 @@ public class Players {
         this.squadId = squadId;
     }
 
+    @XmlTransient
     public long getCountryId() {
         return countryId;
     }
@@ -47,5 +54,20 @@ public class Players {
     public void setCountryId(long countryId) {
         this.countryId = countryId;
     }
-    
+
+    public String getCountryName() {
+        return countryName;
+    }
+
+    public void setCountryName(String countryName) {
+        this.countryName = countryName;
+    }
+
+    public String getSquadName() {
+        return squadName;
+    }
+
+    public void setSquadName(String squadName) {
+        this.squadName = squadName;
+    }
 }

@@ -42,6 +42,20 @@ public class SquadsDao {
             return null;
         }     
     }
+
+    public Squads getSquadById(long id){
+
+        String sql = "SELECT * FROM  super_selector.squads "
+                + " where id= "+id;
+        try{
+            RowMapper<Squads> rowMapper = new SquadsRowMapper();
+            Squads squad = jdbcTemplate.queryForObject(sql,rowMapper);
+            return squad;
+        }
+        catch(Exception ex){
+            return null;
+        }
+    }
     
     
     public class SquadsRowMapper implements RowMapper

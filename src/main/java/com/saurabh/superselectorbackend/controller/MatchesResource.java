@@ -28,8 +28,10 @@ public class MatchesResource {
 
     @GET
     @Produces( { MediaType.APPLICATION_JSON })
-    public Response getCountry(@QueryParam("seriesName")  String seriesName){
-         MatchesResponse response=matchesFacade.getMatches(seriesName);
+    public Response getMatches(@QueryParam("seriesName")  String seriesName
+            ,@QueryParam("upcoming")  boolean isUpcoming){
+         MatchesResponse response=matchesFacade.getMatches(seriesName,isUpcoming);
         return Response.status(200).entity(response).build();
     }
+
 }

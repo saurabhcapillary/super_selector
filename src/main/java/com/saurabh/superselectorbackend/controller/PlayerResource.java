@@ -27,8 +27,9 @@ public class PlayerResource {
     private PlayerFacade playerFacade;
 
     @GET
+    @Path("{id}")
     @Produces( { MediaType.APPLICATION_JSON })
-    public Response getCountry(@PathParam("squadId") @DefaultValue("0") long squadId){
+    public Response getCountry(@PathParam("id")  Long squadId){
         PlayersResponse response=playerFacade.getPlayers(squadId);
         return Response.status(200).entity(response).build();
 

@@ -31,11 +31,17 @@ public class MatchesFacade {
     
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
-    public MatchesResponse getMatches(String seriesName) {
+    public MatchesResponse getMatches(String seriesName,boolean isUpComing) {
        MatchesResponse response = new MatchesResponse();
        Status status;
         try {
-            List<Matches> matches =matchesDao.getMatches(seriesName);
+            List<Matches> matches=null;
+            if(isUpComing){
+                matches = matchesDao.getUpcomingMatches(seriesName);
+            }
+            else {
+                 matches = matchesDao.getMatches(seriesName);
+            }
             response.setMatches(matches);
             status =new Status(true);
         } catch (Exception ex) {
