@@ -5,6 +5,8 @@ import com.saurabh.superselectorbackend.controller.UserResource;
 import com.saurabh.superselectorbackend.controller.PlayerResource;
 import com.saurabh.superselectorbackend.controller.MatchesResource;
 import javax.ws.rs.ApplicationPath;
+
+import com.saurabh.superselectorbackend.filters.AuthFilter;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Component;
 @ApplicationPath("v1")
 public class JerseyConfig extends ResourceConfig {
     public JerseyConfig(){
+        register(AuthFilter.class);
         register(SquadResource.class);
         register(CountryResource.class);
         register(PlayerResource.class);
