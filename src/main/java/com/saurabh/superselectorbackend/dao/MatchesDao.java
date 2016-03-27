@@ -87,8 +87,8 @@ public class MatchesDao {
                 Squads squad1=squadsDao.getSquadById(rs.getLong("squad_id_1"));
                 Squads squad2=squadsDao.getSquadById(rs.getLong("squad_id_2"));
                 if(squad1!=null && squad2!=null) {
-                    matches.setHomeTeam(squad1.getName());
-                    matches.setAwayTeam(squad2.getName());
+                    matches.setHomeTeam(squad1.getShortName());
+                    matches.setAwayTeam(squad2.getShortName());
                 }
                 return matches;
             }
