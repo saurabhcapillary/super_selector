@@ -45,4 +45,13 @@ public class TeamPickResource {
     }
 
 
+    @PUT
+    @Consumes( { MediaType.APPLICATION_JSON })
+    @Produces( { MediaType.APPLICATION_JSON })
+    public Response updateSelectedTeam(@RequestBody MatchPointsResponse matchPoints){
+        MatchPointsResponse response =
+                matchPointsFacade.updateSelectedTeam(matchPoints);
+        return Response.status(200).entity(response).build();
+    }
+
 }

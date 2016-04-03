@@ -27,19 +27,14 @@ public class GroupsDao {
         this.jdbcTemplate = jdbcTemplate;
     }
     
-    public List<Groups> getGroupByCreator(long created_by){
-        
-           String sql = "SELECT * FROM  super_selector.groups "
-                   + " where created_by=:created_by ";
-        try{
-            RowMapper<Groups> rowMapper = new GroupsRowMapper();
-             List<Groups> groups = jdbcTemplate.query(
-			sql, new Object[] { created_by }, rowMapper);
-            return groups;
-        }
-        catch(Exception ex){
-            return null;
-        }     
+    public List<Groups> getGroupByCreator(long created_by) {
+
+        String sql = "SELECT * FROM  super_selector.groups "
+                + " where created_by=:created_by ";
+        RowMapper<Groups> rowMapper = new GroupsRowMapper();
+        List<Groups> groups = jdbcTemplate.query(
+                sql, new Object[]{created_by}, rowMapper);
+        return groups;
     }
     
     

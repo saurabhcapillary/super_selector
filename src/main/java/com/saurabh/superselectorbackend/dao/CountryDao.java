@@ -29,18 +29,13 @@ public class CountryDao {
         this.jdbcTemplate = jdbcTemplate;
     }
     
-    public List<Country> getCountry(){
-        
-           String sql = "SELECT * FROM  super_selector.country  ";
-        try{
-            RowMapper<Country> rowMapper = new CountryRowMapper();
-             List<Country> country = jdbcTemplate.query(
-			sql, new Object[] { }, rowMapper);
-            return country;
-        }
-        catch(Exception ex){
-            return null;
-        }     
+    public List<Country> getCountry() {
+
+        String sql = "SELECT * FROM  super_selector.country  ";
+        RowMapper<Country> rowMapper = new CountryRowMapper();
+        List<Country> country = jdbcTemplate.query(
+                sql, new Object[]{}, rowMapper);
+        return country;
     }
     
     

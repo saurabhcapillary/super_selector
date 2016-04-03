@@ -12,6 +12,14 @@ public class MatchPoints {
     private long points;
     private String playerName;
     private  String matchName;
+    private int catches;
+    private int runs;
+    private int wickets;
+    private int stumps;
+    private int overs;
+    private double econRate;
+    private double strikeRate;
+    private boolean isCaptain;
 
     public long getId() {
         return id;
@@ -67,5 +75,69 @@ public class MatchPoints {
 
     public void setMatchName(String matchName) {
         this.matchName = matchName;
+    }
+
+    public int getCatches() {
+        return catches;
+    }
+
+    public void setCatches(int catches) {
+        this.catches = catches;
+    }
+
+    public int getRuns() {
+        return runs;
+    }
+
+    public void setRuns(int runs) {
+        this.runs = runs;
+    }
+
+    public int getWickets() {
+        return wickets;
+    }
+
+    public void setWickets(int wickets) {
+        this.wickets = wickets;
+    }
+
+    public int getStumps() {
+        return stumps;
+    }
+
+    public void setStumps(int stumps) {
+        this.stumps = stumps;
+    }
+
+    public double getEconRate() {
+        return econRate;
+    }
+
+    public void setEconRate(double econRate) {
+        this.econRate = econRate;
+    }
+
+    public double getStrikeRate() {
+        return strikeRate;
+    }
+
+    public void setStrikeRate(double strikeRate) {
+        this.strikeRate = strikeRate;
+    }
+
+    public boolean isCaptain() {
+        return isCaptain;
+    }
+
+    public void setCaptain(boolean captain) {
+        isCaptain = captain;
+    }
+
+    public int getOvers() {
+        return overs;
+    }
+
+    public void setOvers(int overs) {
+        this.overs = overs;
     }
 }

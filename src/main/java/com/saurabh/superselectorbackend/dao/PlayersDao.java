@@ -27,20 +27,15 @@ public class PlayersDao {
         this.jdbcTemplate = jdbcTemplate;
     }
     
-    public List<Players> getPlayers(long squadId){
-        
-           String sql = "SELECT p.id,p.name,p.squad_id,p.country_id,sq.name as sq_name,c.name as c_name FROM  super_selector.players as p LEFT JOIN super_selector.country as c " +
-                   "on p.country_id=c.id LEFT JOIN super_selector.squads as sq on p.squad_id=sq.id"
-                   + " where squad_id="+squadId;
-        try{
-            RowMapper<Players> rowMapper = new PlayersRowMapper();
-             List<Players> players =  jdbcTemplate.query(
-			sql, rowMapper);
-            return players;
-        }
-        catch(Exception ex){
-            return null;
-        }     
+    public List<Players> getPlayers(long squadId) {
+
+        String sql = "SELECT p.id,p.name,p.squad_id,p.country_id,sq.name as sq_name,c.name as c_name FROM  super_selector.players as p LEFT JOIN super_selector.country as c " +
+                "on p.country_id=c.id LEFT JOIN super_selector.squads as sq on p.squad_id=sq.id"
+                + " where squad_id=" + squadId;
+        RowMapper<Players> rowMapper = new PlayersRowMapper();
+        List<Players> players = jdbcTemplate.query(
+                sql, rowMapper);
+        return players;
     }
     
     

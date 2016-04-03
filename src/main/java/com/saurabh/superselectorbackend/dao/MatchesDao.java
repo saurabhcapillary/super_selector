@@ -42,45 +42,31 @@ public class MatchesDao {
 
         String sql = "SELECT * FROM  super_selector.matches AS m LEFT JOIN "
                 + "super_selector.series as s on m.series_id=s.id WHERE"
-                + " s.name='"+seriesName+"'";
-        try {
-            RowMapper<Matches> rowMapper = new MatchesRowMapper();
-            Map<String, Object> valueMap = new HashMap<>();
-            valueMap.put("name", seriesName);
-            List<Matches> matches = jdbcTemplate.query(sql, rowMapper);
-            return matches;
-        } catch (Exception ex) {
-            return null;
-        }
+                + " s.name='" + seriesName + "'";
+        RowMapper<Matches> rowMapper = new MatchesRowMapper();
+        Map<String, Object> valueMap = new HashMap<>();
+        valueMap.put("name", seriesName);
+        List<Matches> matches = jdbcTemplate.query(sql, rowMapper);
+        return matches;
     }
 
     public List<Matches> getUpcomingMatches(String seriesName) {
 
-        String sql="SELECT * FROM  super_selector.matches AS m  LEFT JOIN " +
+        String sql = "SELECT * FROM  super_selector.matches AS m  LEFT JOIN " +
                 "super_selector.series as s on m.series_id=s.id  WHERE " +
-                "s.name='"+seriesName +"' and m.date < DATE_ADD(NOW(), INTERVAL 14 HOUR)";
-        try{
-            RowMapper<Matches> rowMapper = new MatchesRowMapper();
-            Map<String, Object> valueMap = new HashMap<>();
-            valueMap.put("name", seriesName);
-            List<Matches> matches =jdbcTemplate.query(sql, rowMapper);
-            return matches;
-        }
-        catch(Exception ex){
-            return null;
-        }
+                "s.name='" + seriesName + "' and m.date < DATE_ADD(NOW(), INTERVAL 14 HOUR)";
+        RowMapper<Matches> rowMapper = new MatchesRowMapper();
+        Map<String, Object> valueMap = new HashMap<>();
+        valueMap.put("name", seriesName);
+        List<Matches> matches = jdbcTemplate.query(sql, rowMapper);
+        return matches;
     }
 
-    public Matches getMatchInfoById(Long id){
-        String sql="SELECT * FROM  super_selector.matches where id="+id;
-        try{
-            RowMapper<Matches> rowMapper = new MatchesRowMapper();
-            Matches match=jdbcTemplate.queryForObject(sql, rowMapper);
-            return match;
-        }
-        catch(Exception ex){
-            return null;
-        }
+    public Matches getMatchInfoById(Long id) {
+        String sql = "SELECT * FROM  super_selector.matches where id=" + id;
+        RowMapper<Matches> rowMapper = new MatchesRowMapper();
+        Matches match = jdbcTemplate.queryForObject(sql, rowMapper);
+        return match;
     }
 
 

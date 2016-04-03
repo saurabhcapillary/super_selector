@@ -29,32 +29,22 @@ public class SquadsDao {
         this.jdbcTemplate = jdbcTemplate;
     }
     
-    public List<Squads> getSquads(long seriesId){
-
-           String sql = "SELECT * FROM  super_selector.squads "
-                   + " where series_id= "+seriesId;
-        try{
-            RowMapper<Squads> rowMapper = new SquadsRowMapper();
-            List<Squads> squadsList = jdbcTemplate.query(sql,rowMapper);
-            return squadsList;
-        }
-        catch(Exception ex){
-            return null;
-        }     
-    }
-
-    public Squads getSquadById(long id){
+    public List<Squads> getSquads(long seriesId) {
 
         String sql = "SELECT * FROM  super_selector.squads "
-                + " where id= "+id;
-        try{
-            RowMapper<Squads> rowMapper = new SquadsRowMapper();
-            Squads squad = jdbcTemplate.queryForObject(sql,rowMapper);
-            return squad;
-        }
-        catch(Exception ex){
-            return null;
-        }
+                + " where series_id= " + seriesId;
+        RowMapper<Squads> rowMapper = new SquadsRowMapper();
+        List<Squads> squadsList = jdbcTemplate.query(sql, rowMapper);
+        return squadsList;
+    }
+
+    public Squads getSquadById(long id) {
+
+        String sql = "SELECT * FROM  super_selector.squads "
+                + " where id= " + id;
+        RowMapper<Squads> rowMapper = new SquadsRowMapper();
+        Squads squad = jdbcTemplate.queryForObject(sql, rowMapper);
+        return squad;
     }
     
     
