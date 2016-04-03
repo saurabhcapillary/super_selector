@@ -32,7 +32,7 @@ public class MatchPointsDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public Long getMatchPoints(long userId,long matchId) {
+    public long getMatchPoints(long userId,long matchId) {
 
         String sql = "select sum(points) from match_points " +
                 "where match_id=:match_id and user_id=:user_id group by match_id";
@@ -41,15 +41,21 @@ public class MatchPointsDao {
         paramMap.put("match_id", matchId);
         paramMap.put("user_id", userId);
         Long matchPoints = jdbcTemplate.queryForObject(sql, paramMap, Long.class);
+        if(matchPoints==null){
+            return 0;
+        }
         return matchPoints;
     }
 
-    public Long getTotalPoints(long userId) {
+    public long getTotalPoints(long userId) {
 
         String sql = "SELECT sum(points) FROM  super_selector.match_points where user_id=:user_id";
         Map<String, Object> paramMap = Maps.newHashMap();
         paramMap.put("user_id", userId);
         Long matchPoints = jdbcTemplate.queryForObject(sql, paramMap, Long.class);
+        if(matchPoints==null){
+            return 0;
+        }
         return matchPoints;
     }
 

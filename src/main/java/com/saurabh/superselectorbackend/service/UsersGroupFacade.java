@@ -28,6 +28,9 @@ public class UsersGroupFacade {
 
     @Inject
     private UsersDao usersDao;
+
+    @Inject
+    private MatchPointsFacade matchPointsFacade;
     
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     
@@ -39,6 +42,7 @@ public class UsersGroupFacade {
                     usersDao.login(users.getEmail(), users.getMobile(), users.getPasswordHash());
             status = new Status(true);
             if (dbUser.size() > 0) {
+                dbUser.get(0).setTotalPoints(matchPointsFacade.getUserPoints(dbUser.get(0).getId(),null).getPoints());
                 usersResponse.setUsers(dbUser.get(0));
             }
         } catch (Exception ex) {
