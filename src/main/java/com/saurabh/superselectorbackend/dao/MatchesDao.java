@@ -71,13 +71,24 @@ public class MatchesDao {
         }
     }
 
+    public Matches getMatchInfoById(Long id){
+        String sql="SELECT * FROM  super_selector.matches where id="+id;
+        try{
+            RowMapper<Matches> rowMapper = new MatchesRowMapper();
+            Matches match=jdbcTemplate.queryForObject(sql, rowMapper);
+            return match;
+        }
+        catch(Exception ex){
+            return null;
+        }
+    }
+
 
     public class MatchesRowMapper implements RowMapper
     {
             public Matches mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Matches matches = new Matches();
                 matches.setId(rs.getInt("id"));
-                matches.setName(rs.getString("name"));
                 matches.setCountryId(rs.getInt("country_id"));
                 matches.setSeriesId(rs.getInt("series_id"));
                 matches.setVenue(rs.getString("venue"));

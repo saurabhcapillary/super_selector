@@ -95,19 +95,18 @@ public class UsersDao {
         
     }
      
-    public class UserRowMapper implements RowMapper
-    {
-            public Users mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    Users users = new Users();
-                    users.setId(rs.getInt("id"));
-                    users.setName(rs.getString("name"));
-                    users.setEmail(rs.getString("email"));
-                    users.setMobile(rs.getString("mobile"));
-                    users.setPasswordHash(rs.getString("password"));
-                    users.setCountryId(rs.getLong("country_id"));
-                    users.setState(rs.getString("state"));
-                    users.setCity(rs.getString("city"));
-                    return users;
-            }
+    public class UserRowMapper implements RowMapper {
+        public Users mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Users users = new Users();
+            users.setId(rs.getInt("id"));
+            users.setName(rs.getString("name"));
+            users.setEmail(rs.getString("email"));
+            users.setMobile(rs.getString("mobile"));
+            users.setPasswordHash(rs.getString("password"));
+            users.setCountryId(rs.getLong("country_id"));
+            users.setState(rs.getString("state"));
+            users.setCity(rs.getString("city"));
+            return users;
+        }
     }
 }

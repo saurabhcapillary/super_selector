@@ -1,9 +1,6 @@
 package com.saurabh.superselectorbackend;
-import com.saurabh.superselectorbackend.controller.SquadResource;
-import com.saurabh.superselectorbackend.controller.CountryResource;
-import com.saurabh.superselectorbackend.controller.UserResource;
-import com.saurabh.superselectorbackend.controller.PlayerResource;
-import com.saurabh.superselectorbackend.controller.MatchesResource;
+import com.saurabh.superselectorbackend.controller.*;
+
 import javax.ws.rs.ApplicationPath;
 
 import com.saurabh.superselectorbackend.filters.AuthFilter;
@@ -30,6 +27,7 @@ public class JerseyConfig extends ResourceConfig {
         register(PlayerResource.class);
         register(UserResource.class);
         register(MatchesResource.class);
+        register(TeamPickResource.class);
     }
     
 }

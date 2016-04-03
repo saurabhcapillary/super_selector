@@ -1,14 +1,12 @@
 package com.saurabh.superselectorbackend.controller;
 
-import com.saurabh.superselectorbackend.models.ResponseEntity;
 import com.saurabh.superselectorbackend.models.Users;
+import com.saurabh.superselectorbackend.models.response.MatchPointsResponse;
 import com.saurabh.superselectorbackend.models.response.UsersResponse;
+import com.saurabh.superselectorbackend.service.MatchPointsFacade;
 import com.saurabh.superselectorbackend.service.UsersGroupFacade;
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.springframework.stereotype.Controller;
@@ -32,6 +30,27 @@ public class UserResource {
     
     @Inject
     private UsersGroupFacade usersGroupFacade;
+
+    @Inject
+    private MatchPointsFacade matchPointsFacade;
+
+    @GET
+    @Path("points/{id}")
+    @Produces( { MediaType.APPLICATION_JSON })
+    public Response getCountry(@PathParam("id")  Long userId, @QueryParam("match_id") Long matchId){
+        MatchPointsResponse response=matchPointsFacade.getUserPoints(userId,matchId);
+        return Response.status(200).entity(response).build();
+
+    }
+
+    @GET
+    @Path("points")
+    @Produces( { MediaType.APPLICATION_JSON })
+    public Response getCountry(){
+        MatchPointsResponse response=matchPointsFacade.getUserPoints(1l,1L);
+        return Response.status(200).entity(response).build();
+
+    }
     
     @Path("/login/")
     @POST
@@ -51,4 +70,6 @@ public class UserResource {
                 usersGroupFacade.register(users);
         return Response.status(200).entity(response).build();
     }
+
+
 }
