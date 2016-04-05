@@ -82,6 +82,7 @@ public class UsersDao {
             users.setCountryId(rs.getLong("country_id"));
             users.setState(rs.getString("state"));
             users.setCity(rs.getString("city"));
+            users.setNickName(rs.getString("nickName"));
             return users;
         }
     }
