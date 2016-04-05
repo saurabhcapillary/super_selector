@@ -39,7 +39,7 @@ public class UsersGroupFacade {
         Status status;
         try {
             List<Users> dbUser =
-                    usersDao.login(users.getEmail(), users.getMobile(), users.getPasswordHash());
+                    usersDao.login(users.getNickName(), users.getPasswordHash());
             status = new Status(true);
             if (dbUser.size() > 0) {
                 dbUser.get(0).setTotalPoints(matchPointsFacade.getUserPoints(dbUser.get(0).getId(),null).getPoints());

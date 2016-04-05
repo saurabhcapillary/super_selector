@@ -38,8 +38,8 @@ public class UsersDao {
     public Users register(Users users) {
 
         String sql = "INSERT INTO users " +
-                "(name, email, mobile,country_Id,state,city,password) "
-                + "VALUES (:name, :email, :mobile,:country_id,:state,:city,:password)";
+                "(name, email, mobile,country_Id,state,city,password,nickName) "
+                + "VALUES (:name, :email, :mobile,:country_id,:state,:city,:password,:nickName)";
 
         Map<String, Object> paramMap = Maps.newHashMap();
         paramMap.put("mobile", users.getMobile());
@@ -49,26 +49,21 @@ public class UsersDao {
         paramMap.put("password", users.getPasswordHash());
         paramMap.put("country_id", users.getCountryId());
         paramMap.put("name", users.getName());
+        paramMap.put("nickName", users.getNickName());
         jdbcTemplate.update(sql, paramMap);
         return users;
     }
     
-     public List<Users> login(String email,String mobile,String passwordHash) {
+     public List<Users> login(String nickName,String passwordHash) {
 
          String sql = "SELECT * FROM  super_selector.users WHERE password = :password ";
 
          Map<String, Object> valueMap = new HashMap<>();
-         if (email != null && !email.isEmpty()) {
-             sql += " AND email =:email";
-             valueMap.put("email", email);
-         }
-         if (mobile != null && !mobile.isEmpty()) {
-             sql += " AND mobile =:mobile";
-             valueMap.put("mobile", mobile);
-         }
+             sql += " AND nickName =:nickName";
+             valueMap.put("nickName", nickName);
+         valueMap.put("password", passwordHash);
 
          RowMapper<Users> rowMapper = new UserRowMapper();
-         valueMap.put("password", passwordHash);
 
          List<Users> users = jdbcTemplate.query(sql, valueMap, rowMapper);
          return users;

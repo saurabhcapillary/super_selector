@@ -27,6 +27,7 @@ public class Users extends BaseEntity{
     private String state;
     private String city;
     private long totalPoints;
+    private String nickName;
 
     @XmlTransient
     public long getId() {
@@ -99,5 +100,13 @@ public class Users extends BaseEntity{
 
     public void setTotalPoints(long totalPoints) {
         this.totalPoints = totalPoints;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }
