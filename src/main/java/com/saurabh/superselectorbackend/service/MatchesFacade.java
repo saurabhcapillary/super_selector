@@ -33,6 +33,7 @@ public class MatchesFacade {
     
     public MatchesResponse getMatches(String seriesName,boolean isUpComing) {
        MatchesResponse response = new MatchesResponse();
+        logger.info("Getting matches");
        Status status;
         try {
             List<Matches> matches=null;
@@ -45,7 +46,7 @@ public class MatchesFacade {
             response.setMatches(matches);
             status =new Status(true);
         } catch (Exception ex) {
-            logger.info("Error while getting matches " + ex.getMessage());
+            logger.error("Error while getting matches " ,ex);
             status=new Status(false);    
         }
         response.setStatus(status);

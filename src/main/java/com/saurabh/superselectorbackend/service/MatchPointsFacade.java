@@ -38,7 +38,7 @@ public class MatchPointsFacade {
             status =new Status(true);
             response.setPoints(points);
         } catch (Exception ex) {
-            logger.info("Error while getting user points " + ex.getMessage());
+            logger.error("Error while getting user points {0}" , ex);
             status=new Status(false);
         }
         response.setStatus(status);
@@ -53,7 +53,7 @@ public class MatchPointsFacade {
             matchPointsDao.addSelectedTeam(matchPointsResponse.getMatchPoints());
             status =new Status(true);
         } catch (Exception ex) {
-            logger.info("Error while adding selected team " + ex.getMessage());
+            logger.error("Error while adding selected team {0}" , ex);
             status=new Status(false);
         }
         response.setStatus(status);
@@ -68,7 +68,7 @@ public class MatchPointsFacade {
             response.setMatchPoints(selectedTeam);
             status =new Status(true);
         } catch (Exception ex) {
-            logger.info("Error while getting selected team " + ex.getMessage());
+            logger.error("Error while getting selected team {0}", ex);
             status=new Status(false);
         }
         response.setStatus(status);
@@ -86,7 +86,7 @@ public class MatchPointsFacade {
             matchPointsDao.updateSelectedTeam(matchPoints);
             status =new Status(true);
         } catch (Exception ex) {
-            logger.info("Error while getting selected team " + ex.getMessage());
+            logger.info("Error while getting selected team {}" , ex);
             status=new Status(false);
         }
         response.setStatus(status);

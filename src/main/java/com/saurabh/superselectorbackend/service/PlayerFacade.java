@@ -42,7 +42,7 @@ public class PlayerFacade {
             status =new Status(true);
             response.setPlayers(players);
         } catch (Exception ex) {
-            logger.info("Error while getting players " + ex.getMessage());
+            logger.error("Error while getting players {0}", ex);
             status=new Status(false);
         }
         response.setStatus(status);

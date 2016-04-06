@@ -40,7 +40,7 @@ public class SquadFacade {
             response.setSquads(squads);
             status =new Status(true);
         } catch (Exception ex) {
-            logger.info("Error while getting squads " + ex.getMessage());
+            logger.error("Error while getting squads {}" , ex);
             status=new Status(false);    
         }
         response.setStatus(status);

@@ -46,7 +46,7 @@ public class UsersGroupFacade {
                 usersResponse.setUsers(dbUser.get(0));
             }
         } catch (Exception ex) {
-            logger.info("Error while login " + ex.getMessage());
+            logger.error("Error while login {0}" + ex);
             status = new Status(false);
         }
         usersResponse.setStatus(status);
@@ -64,7 +64,7 @@ public class UsersGroupFacade {
                 response.setUsers(dbUser);
             }
         } catch (Exception ex) {
-            logger.info("Error while register " + ex.getMessage());
+            logger.error("Error while register {0) " + ex);
             status=new Status(false);    
         }
         response.setStatus(status);
