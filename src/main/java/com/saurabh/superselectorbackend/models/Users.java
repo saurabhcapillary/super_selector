@@ -29,7 +29,6 @@ public class Users extends BaseEntity{
     private long totalPoints;
     private String nickName;
 
-    @XmlTransient
     public long getId() {
         return id;
     }
