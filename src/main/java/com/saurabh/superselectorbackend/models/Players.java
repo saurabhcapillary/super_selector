@@ -20,7 +20,6 @@ public class Players {
     private String countryName;
     private String squadName;
 
-    @XmlTransient
     public long getId() {
         return id;
     }
