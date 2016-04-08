@@ -2,6 +2,7 @@ package com.saurabh.superselectorbackend.dao;
 
 import com.saurabh.superselectorbackend.models.MatchPoints;
 import com.saurabh.superselectorbackend.models.Matches;
+import com.saurabh.superselectorbackend.models.UserPoints;
 import jersey.repackaged.com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -9,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
+import java.net.PortUnreachableException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -115,6 +117,15 @@ public class MatchPointsDao {
         return matchPoints;
     }
 
+    public List<UserPoints> getAllUserPoints(){
+        String sql = "select mp.id,mp.user_id,sum(mp.points) as points,u.name " +
+                "from match_points as mp left join users as u on mp.user_id=u.id group by mp.user_id order by points desc";
+        Map<String, Object> paramMap = Maps.newHashMap();
+        RowMapper<UserPoints> mapper = new UsersPointsMapper();
+        List<UserPoints> matchPoints = jdbcTemplate.query(sql, paramMap, mapper);
+        return matchPoints;
+    }
+
 
     public class MatchesPointsMapper implements RowMapper
     {
@@ -129,6 +140,17 @@ public class MatchPointsDao {
             Matches match = matchesDao.getMatchInfoById(rs.getLong("match_id"));
             matchPoints.setMatchName(match.getHomeTeam()+" vs "+match.getAwayTeam());
             return matchPoints;
+        }
+    }
+
+    public class UsersPointsMapper implements RowMapper
+    {
+        public UserPoints mapRow(ResultSet rs, int rowNum) throws SQLException {
+            UserPoints userPoints = new UserPoints();
+            userPoints.setUserId(rs.getInt("user_id"));
+            userPoints.setName(rs.getString("name"));
+            userPoints.setPoints(rs.getInt("points"));
+            return userPoints;
         }
     }
 

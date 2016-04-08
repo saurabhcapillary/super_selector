@@ -3,7 +3,9 @@ package com.saurabh.superselectorbackend.service;
 import com.saurabh.superselectorbackend.dao.MatchPointsDao;
 import com.saurabh.superselectorbackend.models.MatchPoints;
 import com.saurabh.superselectorbackend.models.Status;
+import com.saurabh.superselectorbackend.models.UserPoints;
 import com.saurabh.superselectorbackend.models.response.MatchPointsResponse;
+import com.saurabh.superselectorbackend.models.response.UsersPointsMapping;
 import com.saurabh.superselectorbackend.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +31,7 @@ public class MatchPointsFacade {
         Status status;
         try {
             Long  points;
-            if(matchId==null){
+            if(matchId==null || matchId==0){
                  points= matchPointsDao.getTotalPoints(userId);
             }
             else{
@@ -44,6 +46,24 @@ public class MatchPointsFacade {
         response.setStatus(status);
         return response;
     }
+
+
+    public UsersPointsMapping getAllUserPoints(){
+        UsersPointsMapping response = new UsersPointsMapping();
+        Status status;
+        try {
+            List<UserPoints> allUserPoints = matchPointsDao.getAllUserPoints();
+            status =new Status(true);
+            response.setUserPointsList(allUserPoints);
+        } catch (Exception ex) {
+            logger.error("Error while getting user points {0}" , ex);
+            status=new Status(false);
+        }
+        response.setStatus(status);
+        return response;
+    }
+
+
 
 
     public MatchPointsResponse addSelectedTeam(MatchPointsResponse matchPointsResponse) {

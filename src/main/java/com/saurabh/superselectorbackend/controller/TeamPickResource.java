@@ -3,6 +3,7 @@ package com.saurabh.superselectorbackend.controller;
 import com.saurabh.superselectorbackend.models.MatchPoints;
 import com.saurabh.superselectorbackend.models.Users;
 import com.saurabh.superselectorbackend.models.response.MatchPointsResponse;
+import com.saurabh.superselectorbackend.models.response.UsersPointsMapping;
 import com.saurabh.superselectorbackend.models.response.UsersResponse;
 import com.saurabh.superselectorbackend.service.MatchPointsFacade;
 import org.springframework.stereotype.Controller;
@@ -36,13 +37,18 @@ public class TeamPickResource {
 
 
     @GET
-    @Consumes( { MediaType.APPLICATION_JSON })
     @Produces( { MediaType.APPLICATION_JSON })
     public Response getSelectedTeam(@QueryParam("user_id")  Long userId, @QueryParam("match_id") Long matchId){
         MatchPointsResponse response =
                 matchPointsFacade.getSelectedTeam(userId,matchId);
         return Response.status(200).entity(response).build();
     }
+
+
+
+
+
+
 
 
     @PUT
