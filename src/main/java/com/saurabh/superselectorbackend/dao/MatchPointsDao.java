@@ -82,14 +82,14 @@ public class MatchPointsDao {
     public void updateSelectedTeam(List<MatchPoints> matchPoints) {
 
         String sql = "UPDATE  match_points set points=:points,catches=:catches,runs=:runs,wickets=:wickets" +
-                ",econ_rate=:econ_rate,strike_rate=:strike_rate, playerName=:playerName,matchName=:matchName where id=:id";
+                ",econ_rate=:econ_rate,strike_rate=:strike_rate, playerName=:playerName,matchName=:matchName where match_id=:match_id";
 
             for(MatchPoints mp : matchPoints){
                 Map<String, Object> paramMap = Maps.newHashMap();
-                paramMap.put("id", mp.getId());
+             //   paramMap.put("id", mp.getId());
                 paramMap.put("match_id", mp.getMatchId());
                 paramMap.put("player_id",mp.getPlayerId());
-                paramMap.put("user_id",mp.getUserId());
+              //  paramMap.put("user_id",mp.getUserId());
                 paramMap.put("points",mp.getPoints());
                 paramMap.put("is_captain",mp.isCaptain());
                 paramMap.put("catches",mp.getCatches());
