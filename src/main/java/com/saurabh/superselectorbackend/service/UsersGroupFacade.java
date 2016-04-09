@@ -1,10 +1,14 @@
 package com.saurabh.superselectorbackend.service;
 
+import com.saurabh.superselectorbackend.dao.MatchPointsDao;
 import com.saurabh.superselectorbackend.dao.UsersDao;
+import com.saurabh.superselectorbackend.models.MatchPoints;
 import com.saurabh.superselectorbackend.models.ResponseEntity;
 import com.saurabh.superselectorbackend.models.Status;
 import com.saurabh.superselectorbackend.models.Users;
 import com.saurabh.superselectorbackend.models.response.UsersResponse;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import org.slf4j.Logger;
@@ -28,6 +32,9 @@ public class UsersGroupFacade {
 
     @Inject
     private UsersDao usersDao;
+
+    @Inject
+    private MatchPointsDao matchPointsDao;
 
     @Inject
     private MatchPointsFacade matchPointsFacade;
@@ -62,6 +69,14 @@ public class UsersGroupFacade {
             status =new Status(true);
             if(dbUser.getId()>0){
                 response.setUsers(dbUser);
+                MatchPoints matchPoints=new MatchPoints();
+                matchPoints.setUserId(dbUser.getId());
+                matchPoints.setPoints(0);
+                matchPoints.setMatchId(0);
+                matchPoints.setPlayerId(0);
+                List<MatchPoints> matchPointsList=new ArrayList<>();
+                matchPointsList.add(matchPoints);
+                matchPointsDao.addSelectedTeam(matchPointsList);
             }
         } catch (Exception ex) {
             logger.error("Error while register {0) " + ex);

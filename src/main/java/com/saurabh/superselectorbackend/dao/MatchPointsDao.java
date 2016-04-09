@@ -105,7 +105,7 @@ public class MatchPointsDao {
     }
 
     public List<MatchPoints> getSelectedTeam(Long userId,Long matchId) {
-        String sql = "select mp.id,mp.user_id,mp.match_id,mp.player_id,mp.points,p.name from match_points as mp LEFT JOIN players as p on mp.player_id=p.id " +
+        String sql = "select mp.id,mp.user_id,mp.match_id,mp.player_id,mp.points,p.name,p.squad_id from match_points as mp LEFT JOIN players as p on mp.player_id=p.id " +
                 " left join matches as m on mp.match_id= m.id" +
                 " where match_id=:match_id and user_id=:user_id ";
 
@@ -139,6 +139,10 @@ public class MatchPointsDao {
             matchPoints.setPlayerName(rs.getString("name"));
             Matches match = matchesDao.getMatchInfoById(rs.getLong("match_id"));
             matchPoints.setMatchName(match.getHomeTeam()+" vs "+match.getAwayTeam());
+            try{
+                matchPoints.setSquad(rs.getInt("squad_id"));
+            }
+            catch (Exception ex){}
             return matchPoints;
         }
     }

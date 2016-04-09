@@ -20,6 +20,7 @@ public class MatchPoints {
     private double econRate;
     private double strikeRate;
     private boolean isCaptain;
+    private int squad;
 
     public long getId() {
         return id;
@@ -139,5 +140,13 @@ public class MatchPoints {
 
     public void setOvers(int overs) {
         this.overs = overs;
+    }
+
+    public void setSquad(int squad) {
+        this.squad = squad;
+    }
+
+    public int getSquad() {
+        return squad;
     }
 }
