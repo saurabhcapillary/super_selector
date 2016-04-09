@@ -54,7 +54,7 @@ public class MatchesDao {
 
         String sql = "SELECT * FROM  super_selector.matches AS m  LEFT JOIN " +
                 "super_selector.series as s on m.series_id=s.id  WHERE " +
-                "s.name='" + seriesName + "' and m.date > NOW() and m.date < DATE_ADD(NOW(),INTERVAL 14 HOUR)";
+                "s.name='" + seriesName + "' and m.date > NOW() and m.date < DATE_ADD(NOW(),INTERVAL 20 HOUR)";
         RowMapper<Matches> rowMapper = new MatchesRowMapper();
         Map<String, Object> valueMap = new HashMap<>();
         valueMap.put("name", seriesName);
