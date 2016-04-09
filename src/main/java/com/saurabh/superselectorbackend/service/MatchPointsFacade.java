@@ -74,7 +74,7 @@ public class MatchPointsFacade {
             status =new Status(true);
         } catch (Exception ex) {
             logger.error("Error while adding selected team {0}" , ex);
-            status=new Status(false);
+            status=new Status(true);
         }
         response.setStatus(status);
         return response;
