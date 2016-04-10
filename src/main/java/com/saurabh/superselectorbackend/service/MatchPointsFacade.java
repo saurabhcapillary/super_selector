@@ -53,6 +53,11 @@ public class MatchPointsFacade {
         Status status;
         try {
             List<UserPoints> allUserPoints = matchPointsDao.getAllUserPoints(matchId);
+            int i=1;
+            for(UserPoints userpoints : allUserPoints){
+                userpoints.setRank(i);
+                i++;
+            }
             status =new Status(true);
             response.setUserPointsList(allUserPoints);
         } catch (Exception ex) {

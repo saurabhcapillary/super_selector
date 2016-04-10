@@ -7,6 +7,7 @@ public class UserPoints {
     private long  userId;
     private String name;
     private long points;
+    private int rank;
 
     public long getUserId() {
         return userId;
@@ -30,5 +31,13 @@ public class UserPoints {
 
     public void setPoints(long points) {
         this.points = points;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
     }
 }

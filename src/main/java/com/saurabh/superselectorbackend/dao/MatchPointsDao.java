@@ -169,7 +169,11 @@ public class MatchPointsDao {
         public UserPoints mapRow(ResultSet rs, int rowNum) throws SQLException {
             UserPoints userPoints = new UserPoints();
             userPoints.setUserId(rs.getInt("user_id"));
-            userPoints.setName(rs.getString("name"));
+            String name="";
+            if(rs.getString("name")!=null){
+                name=rs.getString("name");
+            }
+            userPoints.setName(name);
             userPoints.setPoints(rs.getInt("points"));
             return userPoints;
         }
