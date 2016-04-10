@@ -47,7 +47,7 @@ public class UserResource {
     @GET
     @Produces( { MediaType.APPLICATION_JSON })
     @Path("points")
-    public Response getAllUsersPoints(@QueryParam("match_id") Long matchId ){
+    public Response getAllUsersPoints(@QueryParam("match_id") long matchId ){
         UsersPointsMapping response = matchPointsFacade.getAllUserPoints(matchId);
         return Response.status(200).entity(response).build();
     }
