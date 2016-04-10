@@ -48,11 +48,11 @@ public class MatchPointsFacade {
     }
 
 
-    public UsersPointsMapping getAllUserPoints(){
+    public UsersPointsMapping getAllUserPoints(long matchId){
         UsersPointsMapping response = new UsersPointsMapping();
         Status status;
         try {
-            List<UserPoints> allUserPoints = matchPointsDao.getAllUserPoints();
+            List<UserPoints> allUserPoints = matchPointsDao.getAllUserPoints(matchId);
             status =new Status(true);
             response.setUserPointsList(allUserPoints);
         } catch (Exception ex) {

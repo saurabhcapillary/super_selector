@@ -34,4 +34,12 @@ public class MatchesResource {
         return Response.status(200).entity(response).build();
     }
 
+    @GET
+    @Path("{id}")
+    @Produces( { MediaType.APPLICATION_JSON })
+    public Response matchStarted(@PathParam("id")  Long matchId,@QueryParam("seriesName")  String seriesName){
+        MatchesResponse response=matchesFacade.matchStarted(seriesName,matchId);
+        return Response.status(200).entity(response).build();
+    }
+
 }

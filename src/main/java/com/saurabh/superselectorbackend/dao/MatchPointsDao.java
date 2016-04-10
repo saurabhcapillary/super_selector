@@ -119,9 +119,14 @@ public class MatchPointsDao {
         return matchPoints;
     }
 
-    public List<UserPoints> getAllUserPoints(){
+    public List<UserPoints> getAllUserPoints(long matchId){
         String sql = "select mp.id,mp.user_id,sum(mp.points) as points,u.name " +
-                "from match_points as mp left join users as u on mp.user_id=u.id group by mp.user_id order by points desc";
+                "from match_points as mp left join users as u on mp.user_id=u.id ";
+
+        if(matchId!=0){
+            sql +=" where mp.match_id="+matchId;
+        }
+        sql +=" group by mp.user_id order by points desc";
         Map<String, Object> paramMap = Maps.newHashMap();
         RowMapper<UserPoints> mapper = new UsersPointsMapper();
         List<UserPoints> matchPoints = jdbcTemplate.query(sql, paramMap, mapper);

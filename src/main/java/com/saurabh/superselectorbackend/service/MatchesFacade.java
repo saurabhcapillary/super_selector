@@ -5,6 +5,8 @@ import com.saurabh.superselectorbackend.models.Matches;
 import com.saurabh.superselectorbackend.models.Squads;
 import com.saurabh.superselectorbackend.models.Status;
 import com.saurabh.superselectorbackend.models.response.MatchesResponse;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import org.slf4j.Logger;
@@ -48,6 +50,24 @@ public class MatchesFacade {
         } catch (Exception ex) {
             logger.error("Error while getting matches " ,ex);
             status=new Status(false);    
+        }
+        response.setStatus(status);
+        return response;
+    }
+
+    public MatchesResponse matchStarted(String seriesName, Long matchId) {
+        MatchesResponse response = new MatchesResponse();
+        logger.info("Getting matches");
+        Status status;
+        try {
+            Matches matches = matchesDao.getMatchInfoById(matchId);
+            List<Matches> matchesList=new ArrayList<>();
+            matchesList.add(matches);
+            response.setMatches(matchesList);
+            status =new Status(true);
+        } catch (Exception ex) {
+            logger.error("Error while getting matches " ,ex);
+            status=new Status(false);
         }
         response.setStatus(status);
         return response;
