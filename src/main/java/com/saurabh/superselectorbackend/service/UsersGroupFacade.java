@@ -66,6 +66,10 @@ public class UsersGroupFacade {
         try {
             Users dbUser =
                 usersDao.register(users);
+            List<Users> login = usersDao.login(users.getNickName(), users.getPasswordHash());
+            if(login!=null && login.size()>0){
+                dbUser=login.get(0);
+            }
             status =new Status(true);
             if(dbUser.getId()>0){
                 response.setUsers(dbUser);
