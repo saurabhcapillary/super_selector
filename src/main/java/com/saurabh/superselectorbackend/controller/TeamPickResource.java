@@ -44,9 +44,13 @@ public class TeamPickResource {
         return Response.status(200).entity(response).build();
     }
 
-
-
-
+    @DELETE
+    @Produces( { MediaType.APPLICATION_JSON })
+    public Response deleteSelectedTeam(@QueryParam("user_id")  Long userId, @QueryParam("match_id") Long matchId){
+        MatchPointsResponse response =
+                matchPointsFacade.deleteSelectedTeam(userId,matchId);
+        return Response.status(200).entity(response).build();
+    }
 
 
 

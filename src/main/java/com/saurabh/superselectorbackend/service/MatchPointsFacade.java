@@ -113,4 +113,17 @@ public class MatchPointsFacade {
         return response;
     }
 
+    public MatchPointsResponse deleteSelectedTeam(Long userId, Long matchId) {
+        MatchPointsResponse response = new MatchPointsResponse();
+        Status status;
+        try {
+            long deleted = matchPointsDao.deleteSelectedTeam(userId, matchId);
+            status =new Status(true);
+        } catch (Exception ex) {
+            logger.error("Error while getting selected team {0}", ex);
+            status=new Status(false);
+        }
+        response.setStatus(status);
+        return response;
+    }
 }

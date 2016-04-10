@@ -133,6 +133,15 @@ public class MatchPointsDao {
         return matchPoints;
     }
 
+    public long deleteSelectedTeam(Long userId, Long matchId) {
+        String sql="delete from match_points where match_id=:match_id and user_id=:user_id ";
+        Map<String, Object> paramMap = Maps.newHashMap();
+        paramMap.put("match_id", matchId);
+        paramMap.put("user_id", userId);
+        jdbcTemplate.update(sql, paramMap);
+        return 1;
+    }
+
 
     public class MatchesPointsMapper implements RowMapper
     {
