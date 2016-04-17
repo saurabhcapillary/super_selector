@@ -9,6 +9,7 @@ import com.saurabh.superselectorbackend.models.UserPoints;
 import com.saurabh.superselectorbackend.models.response.MatchPointsResponse;
 import com.saurabh.superselectorbackend.models.response.UsersPointsMapping;
 import com.saurabh.superselectorbackend.util.Utils;
+import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -84,7 +85,10 @@ public class MatchPointsFacade {
             List<MatchPoints> matchPoints = matchPointsResponse.getMatchPoints();
             if(matchPoints.size()>0) {
                 Matches matches = matchesDao.getMatchInfoById(matchPoints.get(0).getMatchId());
-                logger.info("current time is "+new Date());
+                Date newDate = DateUtils.addHours(new Date(), 5);
+                newDate=DateUtils.addMinutes(newDate,30);
+
+                logger.info("current time is "+newDate);
                 logger.info("Match time is "+matches.getDate());
                 if(matches.getDate().compareTo(new Date())<=0){
                     logger.info("Match already started {} no team selection can proceed",matches.getId());
