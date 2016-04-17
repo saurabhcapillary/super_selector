@@ -1,7 +1,9 @@
 package com.saurabh.superselectorbackend.service;
 
 import com.saurabh.superselectorbackend.dao.MatchPointsDao;
+import com.saurabh.superselectorbackend.dao.MatchesDao;
 import com.saurabh.superselectorbackend.models.MatchPoints;
+import com.saurabh.superselectorbackend.models.Matches;
 import com.saurabh.superselectorbackend.models.Status;
 import com.saurabh.superselectorbackend.models.UserPoints;
 import com.saurabh.superselectorbackend.models.response.MatchPointsResponse;
@@ -12,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +27,9 @@ public class MatchPointsFacade {
 
     @Inject
     private MatchPointsDao matchPointsDao;
+
+    @Inject
+    private MatchesDao matchesDao;
 
 
     public MatchPointsResponse getUserPoints(Long userId,Long matchId){
@@ -73,10 +79,21 @@ public class MatchPointsFacade {
 
     public MatchPointsResponse addSelectedTeam(MatchPointsResponse matchPointsResponse) {
         MatchPointsResponse response = new MatchPointsResponse();
-        Status status;
+        Status status =new Status(true);;
         try {
-            matchPointsDao.addSelectedTeam(matchPointsResponse.getMatchPoints());
-            status =new Status(true);
+            List<MatchPoints> matchPoints = matchPointsResponse.getMatchPoints();
+            if(matchPoints.size()>0) {
+                Matches matches = matchesDao.getMatchInfoById(matchPoints.get(0).getMatchId());
+                if(matches.getDate().compareTo(new Date())<=0){
+                    logger.debug("Match already started {} no team selection can proceed",matches.getId());
+                    status =new Status(false);
+                }
+                else {
+                    matchPointsDao.addSelectedTeam(matchPoints);
+                    status =new Status(true);
+                }
+            }
+
         } catch (Exception ex) {
             logger.error("Error while adding selected team {0}" , ex);
             status=new Status(true);
