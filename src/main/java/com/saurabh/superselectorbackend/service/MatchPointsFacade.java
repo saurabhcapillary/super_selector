@@ -90,7 +90,7 @@ public class MatchPointsFacade {
 
                 logger.info("current time is "+newDate);
                 logger.info("Match time is "+matches.getDate());
-                if(matches.getDate().compareTo(new Date())<=0){
+                if(matches.getDate().compareTo(newDate)<=0){
                     logger.info("Match already started {} no team selection can proceed",matches.getId());
                     status =new Status(false);
                 }
