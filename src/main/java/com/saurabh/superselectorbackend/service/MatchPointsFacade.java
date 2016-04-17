@@ -84,6 +84,8 @@ public class MatchPointsFacade {
             List<MatchPoints> matchPoints = matchPointsResponse.getMatchPoints();
             if(matchPoints.size()>0) {
                 Matches matches = matchesDao.getMatchInfoById(matchPoints.get(0).getMatchId());
+                logger.debug("current time is "+new Date());
+                logger.debug("Match time is "+matches.getDate());
                 if(matches.getDate().compareTo(new Date())<=0){
                     logger.debug("Match already started {} no team selection can proceed",matches.getId());
                     status =new Status(false);
