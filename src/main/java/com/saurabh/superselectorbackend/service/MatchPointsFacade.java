@@ -89,6 +89,7 @@ public class MatchPointsFacade {
                     status =new Status(false);
                 }
                 else {
+                    logger.debug("Match not started ,Proceed with team selection");
                     matchPointsDao.addSelectedTeam(matchPoints);
                     status =new Status(true);
                 }
