@@ -66,7 +66,7 @@ public class Utils {
             //Runs points
             int runsInput=matchPoints.getRuns();
             points+=runsInput*(int)runsRule.get("per");
-            if(runsInput>100){
+            if(runsInput>=100){
                 pointsAwareded=(int)runsRule.get(">100");
                 points+=pointsAwareded;
             }
