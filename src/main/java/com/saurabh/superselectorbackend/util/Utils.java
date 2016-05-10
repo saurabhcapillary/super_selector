@@ -51,13 +51,13 @@ public class Utils {
             points+=wicketsInput*perWicketPoints;
             long pointsAwareded;
             switch (wicketsInput){
-                case 2: pointsAwareded=(int)wicketsRule.get(">2");
+                case 2: pointsAwareded=(int)wicketsRule.get("2");
                      points+=pointsAwareded;
                     break;
-                case 3: pointsAwareded=(int)wicketsRule.get(">3");
+                case 3: pointsAwareded=(int)wicketsRule.get("3");
                     points+=pointsAwareded;
                     break;
-                case 4: pointsAwareded=(int)wicketsRule.get(">4");
+                case 4: pointsAwareded=(int)wicketsRule.get("4");
                     points+=pointsAwareded;
                     break;
                 default:break;
