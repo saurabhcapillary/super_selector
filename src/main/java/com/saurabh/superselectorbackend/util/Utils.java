@@ -62,6 +62,10 @@ public class Utils {
                     break;
                 default:break;
             }
+            if(wicketsInput>4){
+                pointsAwareded=(int)wicketsRule.get(">4");
+                points+=pointsAwareded;
+            }
 
             //Runs points
             int runsInput=matchPoints.getRuns();
@@ -93,15 +97,15 @@ public class Utils {
 
             //econRate
             double econRateInput=matchPoints.getEconRate();
-            if(matchPoints.getOvers()>=3 & econRateInput<4){
+            if(matchPoints.getOvers()>=3 & econRateInput<=4){
                 pointsAwareded=(int)econRateRule.get("<4.0");
                 points+=pointsAwareded;
             }
-            else if(matchPoints.getOvers()>=3 & econRateInput<5){
+            else if(matchPoints.getOvers()>=3 & econRateInput<=5){
                 pointsAwareded=(int)econRateRule.get("<5.0");
                 points+=pointsAwareded;
             }
-            else if(matchPoints.getOvers()>=3 & econRateInput<6){
+            else if(matchPoints.getOvers()>=3 & econRateInput<=6){
                 pointsAwareded=(int)econRateRule.get("<6.0");
                 points+=pointsAwareded;
             }
