@@ -4,15 +4,9 @@
 package com.saurabh.superselectorbackend.models;
 
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import javax.xml.bind.annotation.XmlElement;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.stream.Collectors;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
