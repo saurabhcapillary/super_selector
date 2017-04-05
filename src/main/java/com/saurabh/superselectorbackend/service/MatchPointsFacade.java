@@ -131,7 +131,9 @@ public class MatchPointsFacade {
             List<MatchPoints> matchPoints=matchPointsRequest.getMatchPoints();
             for(MatchPoints mp: matchPoints){
                 mp.setPoints(Utils.calculatePoints(mp));
+                logger.debug("Calculated match points is "+mp.getPlayerName()+" "+mp.getPoints());
             }
+
             matchPointsDao.updateSelectedTeam(matchPoints);
             status =new Status(true);
         } catch (Exception ex) {

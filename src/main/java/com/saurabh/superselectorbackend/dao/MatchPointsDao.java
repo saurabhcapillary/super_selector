@@ -4,6 +4,8 @@ import com.saurabh.superselectorbackend.models.MatchPoints;
 import com.saurabh.superselectorbackend.models.Matches;
 import com.saurabh.superselectorbackend.models.UserPoints;
 import jersey.repackaged.com.google.common.collect.Maps;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -28,7 +30,7 @@ public class MatchPointsDao {
     @Inject
     private MatchesDao matchesDao;
 
-
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     public MatchPointsDao(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -102,6 +104,7 @@ public class MatchPointsDao {
                 paramMap.put("stumps",mp.getStumps());
                 paramMap.put("playerName",mp.getPlayerName());
                 paramMap.put("matchName",mp.getMatchName());
+                logger.info("sql is "+sql);
                 jdbcTemplate.update(sql,paramMap);
             }
     }
