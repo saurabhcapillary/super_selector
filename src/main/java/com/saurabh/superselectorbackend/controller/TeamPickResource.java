@@ -58,9 +58,9 @@ public class TeamPickResource {
     @PUT
     @Consumes( { MediaType.APPLICATION_JSON })
     @Produces( { MediaType.APPLICATION_JSON })
-    public Response updateSelectedTeam(@RequestBody MatchPointsResponse matchPoints){
+    public Response updateSelectedTeam(@RequestBody MatchPointsResponse matchPoints,@QueryParam("match_id") Long matchId){
         MatchPointsResponse response =
-                matchPointsFacade.updateSelectedTeam(matchPoints);
+                matchPointsFacade.updateSelectedTeam(matchPoints,matchId);
         return Response.status(200).entity(response).build();
     }
 

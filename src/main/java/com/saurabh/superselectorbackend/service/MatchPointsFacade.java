@@ -124,12 +124,13 @@ public class MatchPointsFacade {
         return response;
     }
 
-    public MatchPointsResponse updateSelectedTeam(MatchPointsResponse matchPointsRequest) {
+    public MatchPointsResponse updateSelectedTeam(MatchPointsResponse matchPointsRequest,Long matchId) {
         MatchPointsResponse response = new MatchPointsResponse();
         Status status;
         try {
             List<MatchPoints> matchPoints=matchPointsRequest.getMatchPoints();
             for(MatchPoints mp: matchPoints){
+                mp.setMatchId(matchId);
                 mp.setPoints(Utils.calculatePoints(mp));
                 logger.debug("Calculated match points is "+mp.getPlayerName()+" "+mp.getPoints());
             }
